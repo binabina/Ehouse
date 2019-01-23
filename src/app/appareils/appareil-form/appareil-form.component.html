@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <h2>Enregister un nouvel appareil</h2>
+    <button class="btn text-primary" (click)="onBack()"><span class="glyphicon glyphicon-arrow-left"></span> Retour</button>
+    <div class="thumbnail">
+      <div class="caption">
+        <form [formGroup]="appareilForm" (ngSubmit)="onSaveAppareil()">
+          <div class="form-group">
+            <label for="name">Nom <strong class="text-danger">*</strong></label>
+            <input type="text" class="form-control" placeholder="Appareil" id="name" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="consumption">Consommation(en kWh) <strong class="text-danger">*</strong></label>
+            <input type="number" class="form-control" id="consumption" formControlName="consumption">
+          </div>
+          <div formArrayName="description" class="list-group">
+            <label>Description </label>
+            <p (click)="onAddDescription()" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> Ajouter une description</p>
+            <div class="list-group-item" *ngFor="let control of getDescriptionArray().controls; let i=index">
+              <div class="input-group" >
+                <input class="form-control" [formControlName]="i" placeholder="Description {{i+1}}">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-remove-circle text-danger" (click)="onRemoveDescription(i)" style="cursor: pointer" data-toggle="tooltip" data-placement="bottom" title="Supprimer la description {{i+1}}" ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Ajouter une image</label>
+            <input type="file" (change)="detectFile($event)" class="form-control"  accept="image/*">
+            <p class="text-success" *ngIf="fileUploaded">Photo chargée !</p>
+          </div>
+          <button class="  n btn-success btn-block btn-lg" [disabled]="appareilForm.invalid || fileIsUploading" type="submit">Enregister</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

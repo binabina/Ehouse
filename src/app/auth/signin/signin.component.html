@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h2 class="text-center">Authentification</h2>
+    <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Adresse mail</label>
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+          <input type="text" id="email" class="form-control" formControlName="email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+          <input type="password" id="password" class="form-control" formControlName="password">
+        </div>
+      </div>
+      <div class="form-group">
+        <a routerLink="/auth/signup" class="pull-left">Vous n'avez pas de compte ?</a>
+        <a routerLink="/auth/reset-password" class="pull-right">Mot de passe oublié ?</a>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg" type="submit" [disabled]="signInForm.invalid">Connexion</button>
+    </form>
+    <p class="text-danger">
+      {{errorMessage}}
+    </p>
+  </div>
+</div>

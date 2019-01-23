@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <h2>À propos de moi</h2>
+    <button class="btn text-primary" (click)="onBack()"><span class="glyphicon glyphicon-arrow-left"></span> Retour</button>
+    <div class="list-group">
+      <div class="list-group-item">
+        <h5 class="text-center">Changer votre mot de passe</h5>
+        <form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword()">
+          <div class="form-group">
+            <label for="password">Modifier votre mot de passe</label>
+            <input type="password" id="password" class="form-control" placeholder="Minimum 6 caractères" formControlName="password">
+          </div>
+          <div class="form-group">
+            <label for="confirmpassword">Confirmer votre nouveau mot de passe</label>
+            <input type="password" id="confirmpassword" class="form-control" placeholder="Minimum 6 caractères" formControlName="confirmpassword">
+          </div>
+          <div *ngIf="changePasswordForm.get('password').value!='' && changePasswordForm.get('confirmpassword').value!='' && changePasswordForm.get('password').value!=changePasswordForm.get('confirmpassword').value " class="alert-danger text-center form-group">
+            <p>Veuillez bien confirmer votre mot de passe !</p>
+          </div>
+          <button class="btn btn-success btn-block btn-lg" type="submit" [disabled]="changePasswordForm.invalid || changePasswordForm.get('password').value!=changePasswordForm.get('confirmpassword').value">Enregistrer</button>
+        </form>
+      </div>
+      <div class="list-group-item">
+        <h5 class="text-center">Modifier votre adresse mail</h5>
+        <form #femail="ngForm" (ngSubmit)="onChangeEmail(femail)">
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <input type="email" class="form-control" name="name" id="email" [(ngModel)]="userEmail" disabled>
+          </div>
+          <div class="form-group">
+            <label for="newemail">Nouvel adresse mail</label>
+            <input type="email" class="form-control" name="newemail" id="newemail" [ngModel]="" required>
+          </div>
+          <button class="btn btn-success btn-block btn-lg" [disabled]="femail.invalid" type="submit">Enregistrer</button>
+        </form>
+      </div>
+      <div class="list-group-item">
+        <h5 class="text-center">Modifier votre nom</h5>
+        <form #fname="ngForm" (ngSubmit)="onChangeName(fname)">
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" name="name" id="name" [(ngModel)]="userName" disabled>
+          </div>
+          <div class="form-group">
+            <label for="newname">Nouveau nom</label>
+            <input type="text" class="form-control" name="newname" placeholder="Prénom NOM" id="newname" [ngModel]="" required>
+          </div>
+          <button class="btn btn-success btn-block btn-lg" [disabled]="fname.invalid" type="submit">Enregistrer</button>
+        </form>
+      </div>
+
+    </div>
+    <button class="btn btn-danger btn-block btn-lg" (click)="onDeleteUser()">Supprimer votre compte</button>
+  </div>
+</div>
